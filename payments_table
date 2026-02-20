@@ -1,0 +1,16 @@
+create table Payments(
+payment_id int primary key identity ,
+transaction_id int not null ,
+payment_type nvarchar(50) not null,
+amount decimal(10,2),
+payment_date datetime not null default getdate(),
+payment_method nvarchar(50) not null,
+paid_by nvarchar(50),
+receipt_number nvarchar(50),
+receipt_method nvarchar(50),
+notes nvarchar(50),
+created_at datetime not null default getdate(),
+ constraint FK_payment_transaction 
+  foreign key (transaction_id) 
+ references [Transactions](transaction_id)
+)
