@@ -1,0 +1,40 @@
+
+create table Properties(
+property_id int  primary key identity ,
+address nvarchar (50) not null ,
+city nvarchar(50) not null ,
+district nvarchar(50) not null ,
+property_type nvarchar (50) not null,
+area_sqm decimal(10,2) not null ,
+floors int not null ,
+rooms int ,
+bathrooms int ,
+description nvarchar(500),
+legal_description nvarchar(1000) not null,
+ created_at  datetime not null default getdate(),
+ updated_at  datetime not null default getdate()
+)
+
+create table Appointments (
+    appointment_id int primary key identity,
+    user_id int not null,
+    transaction_id int not null ,
+    title nvarchar(100) not null,
+    appointment_type nvarchar(50),
+    appointment_date datetime not null,
+    location nvarchar(200) not null ,
+    description nvarchar(500) ,
+    status nvarchar(50) not null,
+    reminder_sent bit not null default 0,
+    reminder_date datetime ,
+    created_at datetime not null default getdate(),
+    updated_at datetime ,
+
+    constraint FK_Appointment_User 
+        foreign key (user_id) 
+        references [Users](user_id),
+
+    constraint FK_Appointment_Transaction 
+        foreign key (transaction_id) 
+        references [Transactions](transaction_id)
+)
